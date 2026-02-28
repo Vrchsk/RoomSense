@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>RoomSense</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<div class="box">
+    <h1>RoomSense</h1>
+    <p>Smart room allocation with explainable decisions</p>
+
+    <form method="POST">
+        <label>Rooms</label>
+        <small>Format: R1,60,yes | R2,40,no | Lab1,30,yes</small>
+        <input type="text" name="rooms" required>
+
+        <label>Class Strength</label>
+        <input type="number" name="strength" required>
+
+        <label>Projector Required?</label>
+        <select name="projector">
+            <option value="no">No</option>
+            <option value="yes">Yes</option>
+        </select>
+
+        <button type="submit">Allocate</button>
+    </form>
+
+    {% if result %}
+        <div class="output">
+            <strong>Result:</strong> {{ result }}
+        </div>
+    {% endif %}
+
+    {% if log %}
+        <div class="log">
+            <strong>Decision Log:</strong>
+            <ul>
+                {% for step in log %}
+                    <li>{{ step }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+</div>
+
+</body>
+</html>
